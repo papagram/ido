@@ -34,8 +34,8 @@ module Ido
     # generatorの設定
     config.generators do |g|
       g.orm :active_record
-      g.test_framework :rspec, fixture: true
-      g.fixture_replacement :factory_girl, dir: "spec/factories"
+      # g.test_framework :rspec, fixture: true
+      # g.fixture_replacement :factory_girl, dir: "spec/factories"
       g.view_specs false
       g.controller_specs true
       g.routing_specs false
