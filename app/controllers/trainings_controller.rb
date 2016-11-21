@@ -4,4 +4,8 @@ class TrainingsController < ApplicationController
 
   def message
   end
+
+  def tasks
+    @tasks = Task.all
+  end
 end
