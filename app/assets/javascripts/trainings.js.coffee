@@ -1,16 +1,15 @@
-ajax =
-  (jqXHR, successDo) ->
-    jqXHR().done(
-      (response, statusText, xhr) ->
-        successDo(response)
-    ).fail(
-      (xhr, statusText, errorThrown) ->
-        alert "#{statusText}: データの取得に失敗しました。"
-        console.log errorThrown
-    ).always(
-      (response, statusText, obj) ->
-        console.log '通信が完了しました。'
-    )
+ajax = (jqXHR, successDo) ->
+  jqXHR().done(
+    (response, statusText, xhr) ->
+      successDo(response)
+  ).fail(
+    (xhr, statusText, errorThrown) ->
+      alert "#{statusText}: データの取得に失敗しました。"
+      console.log errorThrown
+  ).always(
+    (response, statusText, obj) ->
+      console.log '通信が完了しました。'
+  )
 
 test = ->
   $.ajax({
@@ -19,14 +18,12 @@ test = ->
     timeout: 10000
   })
 
-testSuccessDo =
-  (response) ->
-    $('#message').text(response.message)
+testSuccessDo = (response) ->
+  $('#message').text(response.message)
 
 $ ->
-  $ '#test'
-    .on 'click', ->
-      ajax(test, testSuccessDo)
+  $('#test').on 'click', ->
+    ajax(test, testSuccessDo)
 
 tasks = ->
   $.ajax({
@@ -35,10 +32,9 @@ tasks = ->
     timeout: 10000,
   })
 
-taskSuccessDo =
-  (response) ->
-    for task in response
-      $('#task-list').append "<li>#{task.subject}</li>"
+taskSuccessDo = (response) ->
+  for task in response
+    $('#task-list').append "<li>#{task.subject}</li>"
 
 $ ->
   alert 'タスクを全件取得します。'
