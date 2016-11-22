@@ -34,7 +34,7 @@ tasks = ->
 
 taskSuccessDo = (response) ->
   for task in response
-    $('#task-list').append "<li>#{task.subject}</li>"
+    $('#task-list').append $('<li>').text(task.subject)
 
 $ ->
   alert 'タスクを全件取得します。'
