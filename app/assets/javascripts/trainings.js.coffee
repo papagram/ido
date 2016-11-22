@@ -12,11 +12,11 @@ ajax = (jqXHR, successDo) ->
   )
 
 test = ->
-  $.ajax({
+  $.ajax {
     type: 'GET',
     url: '/trainings/message.json',
     timeout: 10000
-  })
+  }
 
 testSuccessDo = (response) ->
   $('#message').text(response.message)
@@ -26,11 +26,11 @@ $ ->
     ajax(test, testSuccessDo)
 
 tasks = ->
-  $.ajax({
+  $.ajax {
     type: 'GET',
     url: '/trainings/tasks.json',
     timeout: 10000,
-  })
+  }
 
 taskSuccessDo = (response) ->
   for task in response
