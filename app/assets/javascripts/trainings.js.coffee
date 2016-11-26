@@ -7,7 +7,6 @@ trainings.init = ->
     timeout: 10000,
   ).then(
     (response, statusText, obj) ->
-      alert 'タスクを全件取得します。'
       for task in response
         $('<li>').appendTo('#task-list').text(task.subject)
   )
