@@ -21,7 +21,7 @@ trainings.request = (params) ->
       console.log '通信が完了しました。'
   )
 
-trainings.test = ->
+trainings.getTestMessage = ->
   trainings.request(
     type: 'GET',
     url: '/trainings/message.json',
@@ -33,4 +33,4 @@ trainings.test = ->
 
 $ ->
   $('#test').on 'click', ->
-    trainings.test()
+    trainings.getTestMessage()
