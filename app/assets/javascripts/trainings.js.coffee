@@ -1,7 +1,7 @@
-window.trainings = {}
+window.TRAININGS = {}
 
-trainings.init = ->
-  trainings.request(
+TRAININGS.init = ->
+  TRAININGS.request(
     type: 'GET',
     url: '/trainings/tasks.json',
     timeout: 10000,
@@ -11,7 +11,7 @@ trainings.init = ->
         $('<li>').appendTo('#task-list').text(task.subject)
   )
 
-trainings.request = (params) ->
+TRAININGS.request = (params) ->
   $.ajax(params).fail(
     (xhr, statusText, errorThrown) ->
       alert "#{statusText}: データの取得に失敗しました。"
@@ -21,8 +21,8 @@ trainings.request = (params) ->
       console.log '通信が完了しました。'
   )
 
-trainings.getTestMessage = ->
-  trainings.request(
+TRAININGS.getTestMessage = ->
+  TRAININGS.request(
     type: 'GET',
     url: '/trainings/message.json',
     timeout: 10000
@@ -33,4 +33,4 @@ trainings.getTestMessage = ->
 
 $ ->
   $('#test').on 'click', ->
-    trainings.getTestMessage()
+    TRAININGS.getTestMessage()
