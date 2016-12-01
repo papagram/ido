@@ -1,7 +1,8 @@
-window.TRAININGS = {}
+window.IDO = {}
+window.IDO.trainings = {}
 
-TRAININGS.init = ->
-  TRAININGS.request(
+IDO.trainings.init = ->
+  IDO.trainings.request(
     type: 'GET',
     url: '/trainings/tasks.json',
     timeout: 10000,
@@ -11,7 +12,7 @@ TRAININGS.init = ->
         $('<li>').appendTo('#task-list').text(task.subject)
   )
 
-TRAININGS.request = (params) ->
+IDO.trainings.request = (params) ->
   $.ajax(params).fail(
     (xhr, statusText, errorThrown) ->
       alert "#{statusText}: データの取得に失敗しました。"
@@ -21,8 +22,8 @@ TRAININGS.request = (params) ->
       console.log '通信が完了しました。'
   )
 
-TRAININGS.getTestMessage = ->
-  TRAININGS.request(
+IDO.trainings.getTestMessage = ->
+  IDO.trainings.request(
     type: 'GET',
     url: '/trainings/message.json',
     timeout: 10000
@@ -33,4 +34,4 @@ TRAININGS.getTestMessage = ->
 
 $ ->
   $('#test').on 'click', ->
-    TRAININGS.getTestMessage()
+    IDO.trainings.getTestMessage()
