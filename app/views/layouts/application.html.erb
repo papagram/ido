@@ -1,14 +1,61 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <title>Ido</title>
     <%= csrf_meta_tags %>
 
+    <link href="//cdn.muicss.com/mui-0.9.6/css/mui.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://unpkg.com/flatpickr/dist/flatpickr.min.css">
     <%= stylesheet_link_tag    'application', media: 'all' %>
+    <script src="//cdn.muicss.com/mui-0.9.6/js/mui.min.js"></script>
+    <script src="https://unpkg.com/flatpickr"></script>
     <%= javascript_include_tag 'application' %>
   </head>
 
   <body>
-    <%= yield %>
+    <div class="mui-container-fluid">
+      <div class="mi-row">
+        <div class="mui-col-md-2">
+          <div id="sidedrawer-brand" class="mui--appbar-line-height">
+            <span class="mui--text-title">Ido</span>
+          </div>
+          <div class="mui-divider"></div>
+          <ul class="mui-list--unstyled">
+            <li>
+              <%= link_to 'Task', tasks_path %>
+            </li>
+          </ul>
+        </div>
+        <div class="mui-col-md-10">
+          <header id="header">
+            <div class="mui-appbar mui--appbar-line-height">
+              <table width="100%">
+                <tr style="vertical-align:middle;">
+                  <td class="mui--appbar-height" align="right">
+                    <%= link_to 'GitHub', 'https://github.com/rinkun/ido', target: '_blank' %>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </header>
+          <div id="content-wrapper">
+            <div class="mui-panel">
+              <%= yield %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer id="footer">
+      <div class="mui-container-fluid">
+        <div class="mui--text-center">
+          &copy <a href="https://papagram.com">Papa-gram</a>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>

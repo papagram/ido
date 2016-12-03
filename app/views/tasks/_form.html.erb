@@ -11,32 +11,30 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="mui-textfield">
     <%= f.label :subject %>
     <%= f.text_field :subject %>
   </div>
 
-  <div class="field">
+  <div class="mui-textfield">
     <%= f.label :body %>
     <%= f.text_area :body %>
   </div>
 
-  <div class="field">
+  <div class="mui-select">
     <%= f.label :status %>
     <%= f.select :status, Task.statuses.keys.to_a %>
   </div>
 
-  <div class="field">
+  <div class="mui-textfield">
     <%= f.label :start_at %>
-    <%= f.datetime_select :start_at %>
+    <%= f.text_field :start_at, class: 'calendar' %>
   </div>
 
-  <div class="field">
+  <div class="mui-textfield">
     <%= f.label :closing_at %>
-    <%= f.datetime_select :closing_at %>
+    <%= f.text_field :closing_at, class: 'calendar' %>
   </div>
 
-  <div class="actions">
-    <%= f.submit id: 'post-new-task' %>
-  </div>
+  <%= f.submit id: 'post-new-task', class: 'mui-btn mui-btn--flat' %>
 <% end %>

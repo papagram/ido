@@ -12,6 +12,11 @@ IDO.tasks.init = ->
       $(template(task)).appendTo tbody
   )
 
+IDO.tasks.init_form = ->
+  flatpickr('.calendar', {
+    enableTime: true
+  })
+
 IDO.tasks.post = ->
   IDO.request(
     type: 'POST',

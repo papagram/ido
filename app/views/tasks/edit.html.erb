@@ -1,6 +1,9 @@
-<h1>Editing Task</h1>
+<strong>Editing Task</strong>
 
 <%= render 'form', task: @task %>
 
-<%= link_to 'Show', @task %> |
-<%= link_to 'Back', tasks_path %>
+<script>
+  $(function() {
+    IDO.tasks.init_form();
+  });
+</script>
