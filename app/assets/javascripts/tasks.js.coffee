@@ -17,10 +17,11 @@ IDO.tasks.post = ->
     type: 'POST',
     url: '/tasks.json',
     dataType: 'json',
-    data: new FormData($('#new_task')).get(0),
+    data: $('#new_task').serialize(),
     timeout: 10000,
   ).then((response) ->
     console.log response
+    location.href= '/tasks'
   )
 
 $ ->
