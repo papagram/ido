@@ -23,7 +23,7 @@
 
   <div class="field">
     <%= f.label :status %>
-    <%= f.number_field :status %>
+    <%= f.select :status, Task.statuses.keys.to_a %>
   </div>
 
   <div class="field">
@@ -37,6 +37,6 @@
   </div>
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit id: 'post-new-task' %>
   </div>
 <% end %>
