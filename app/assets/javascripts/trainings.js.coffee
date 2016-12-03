@@ -5,10 +5,9 @@ IDO.trainings.init = ->
     type: 'GET',
     url: '/trainings/tasks.json',
     timeout: 10000,
-  ).then(
-    (response) ->
-      for task in response
-        $('<li>').appendTo('#task-list').text(task.subject)
+  ).then((response) ->
+    for task in response
+      $('<li>').appendTo('#task-list').text(task.subject)
   )
 
 IDO.trainings.getTestMessage = ->
@@ -16,9 +15,8 @@ IDO.trainings.getTestMessage = ->
     type: 'GET',
     url: '/trainings/message.json',
     timeout: 10000
-  ).then(
-    (response) ->
-      $('#message').text(response.message)
+  ).then((response) ->
+    $('#message').text(response.message)
   )
 
 $ ->
