@@ -1,22 +1,24 @@
-test = ->
-  $.ajax({
+window.IDO.trainings = {}
+
+IDO.trainings.init = ->
+  IDO.request(
+    type: 'GET',
+    url: '/trainings/tasks.json',
+    timeout: 10000,
+  ).then((response) ->
+    for task in response
+      $('<li>').appendTo('#task-list').text(task.subject)
+  )
+
+IDO.trainings.getTestMessage = ->
+  IDO.request(
     type: 'GET',
     url: '/trainings/message.json',
     timeout: 10000
-  })
+  ).then((response) ->
+    $('#message').text(response.message)
+  )
 
 $ ->
-  $ '#test'
-    .on 'click', ->
-      test()
-        .done(
-          (response, statusText, xhr) ->
-            $('#message').text(response.message)
-        ).fail(
-          (xhr, statusText, errorThrown) ->
-            alert "#{statusText}: データの取得に失敗しました。"
-            console.log errorThrown
-        ).always(
-          (response, statusText, obj) ->
-            console.log '通信が完了しました。'
-        )
+  $('#test').on 'click', ->
+    IDO.trainings.getTestMessage()
