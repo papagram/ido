@@ -12,4 +12,11 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require underscore-min
 //= require_tree .
+
+_.templateSettings = {
+    interpolate : /\{\{=(.+?)\}\}/g,
+    escape : /\{\{-(.+?)\}\}/g,
+    evaluate: /\{\{(.+?)\}\}/g,
+};

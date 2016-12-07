@@ -14,22 +14,28 @@
     </tr>
   </thead>
 
-  <tbody>
-    <% @tasks.each do |task| %>
-      <tr>
-        <td><%= task.subject %></td>
-        <td><%= task.body %></td>
-        <td><%= task.status %></td>
-        <td><%= task.start_at %></td>
-        <td><%= task.closing_at %></td>
-        <td><%= link_to 'Show', task %></td>
-        <td><%= link_to 'Edit', edit_task_path(task) %></td>
-        <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
+  <tbody id="tasks-data"></tbody>
 </table>
 
 <br>
 
 <%= link_to 'New Task', new_task_path %>
+
+<script type="text/html" id="tasks-template">
+  <tr>
+    <td>{{- subject }}</td>
+    <td>{{- body }}</td>
+    <td>{{- status }}</td>
+    <td>{{- start_at }}</td>
+    <td>{{- closing_at }}</td>
+    <td><a href="/tasks/{{- id }}">Show</a></td>
+    <td><a href="/tasks/{{- id }}/edit">Edit</a></td>
+    <td><a href="/tasks/{{- id }}" data-method="delete">Destroy</a></td>
+  </tr>
+</script>
+
+<script>
+  $(function() {
+    IDO.tasks.init();
+  });
+</script>
