@@ -12,10 +12,10 @@ IDO.tasks.init = ->
       $(template(task)).appendTo tbody
   )
 
-  IDO.ready_datetimepicker()
+  IDO.readyDatetimepicker()
 
-IDO.tasks.init_new = ->
-  IDO.ready_datetimepicker()
+IDO.tasks.initNew = ->
+  IDO.readyDatetimepicker()
 
 IDO.tasks.post = ->
   IDO.request(
