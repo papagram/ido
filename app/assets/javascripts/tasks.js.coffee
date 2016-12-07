@@ -12,10 +12,10 @@ IDO.tasks.init = ->
       $(template(task)).appendTo tbody
   )
 
-IDO.tasks.init_form = ->
-  flatpickr('.calendar', {
-    enableTime: true
-  })
+  IDO.ready_datetimepicker()
+
+IDO.tasks.init_new = ->
+  IDO.ready_datetimepicker()
 
 IDO.tasks.post = ->
   IDO.request(
