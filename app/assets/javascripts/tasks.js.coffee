@@ -34,3 +34,9 @@ $ ->
     e.preventDefault()
     IDO.tasks.post()
   )
+
+$ ->
+  $('#new-form-link').on('click', (e) ->
+    e.preventDefault()
+    $('#new-task-wrapper').toggleClass('display-none')
+  )

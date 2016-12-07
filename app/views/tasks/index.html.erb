@@ -1,8 +1,15 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Tasks</h1>
+<div class="mui-row">
+  <div class="mui-col-md-12">
+    <h1>Tasks</h1>
+    <%= link_to 'New Task', new_task_path, class: 'mui-btn mui-btn--flat mui-btn--primary mui--pull-right', id: 'new-form-link' %>
+  </div>
+</div>
 
-<%= link_to 'New Task', new_task_path, class: 'mui-btn mui-btn--flat mui-btn--primary mui--pull-right' %>
+<div id="new-task-wrapper" class="mui-panel display-none">
+  <%= render 'form', task: @task %>
+</div>
 
 <table class="mui-table">
   <thead>
