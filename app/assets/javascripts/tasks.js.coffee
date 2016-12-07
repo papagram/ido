@@ -6,10 +6,7 @@ IDO.tasks.init = ->
     url: '/tasks.json',
     timeout: 10000,
   ).then((response) ->
-    template = _.template($('#tasks-template').text())
-    tbody = $('#tasks-data')
-    _.each response, (task) ->
-      $(template(task)).appendTo tbody
+    IDO.tasks.insertTask(response)
   )
 
   IDO.readyDatetimepicker()
@@ -25,9 +22,17 @@ IDO.tasks.post = ->
     data: $('#new_task').serialize(),
     timeout: 10000,
   ).then((response) ->
-    console.log response
-    location.href= '/tasks'
+    IDO.tasks.insertTask(response)
   )
+
+IDO.tasks.insertTask = (response) ->
+  template = _.template($('#tasks-template').text())
+  tbody = $('#tasks-data')
+  if Array.isArray(response)
+    _.each response, (task) ->
+      $(template(task)).appendTo tbody
+  else
+    $(template(response)).appendTo tbody
 
 $ ->
   $('#post-new-task').on('click', (e) ->
