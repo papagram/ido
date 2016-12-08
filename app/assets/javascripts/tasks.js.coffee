@@ -12,7 +12,12 @@ IDO.tasks.init = ->
       $(template(task)).appendTo tbody
   )
 
-IDO.tasks.init_form = ->
+IDO.tasks.init_new = ->
+  $('#post-new-task').on('click', (e) ->
+    e.preventDefault()
+    IDO.tasks.post()
+  )
+
   flatpickr('.calendar', {
     enableTime: true
   })
@@ -27,10 +32,4 @@ IDO.tasks.post = ->
   ).then((response) ->
     console.log response
     location.href= '/tasks'
-  )
-
-$ ->
-  $('#post-new-task').on('click', (e) ->
-    e.preventDefault()
-    IDO.tasks.post()
   )
