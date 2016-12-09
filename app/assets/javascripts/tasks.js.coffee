@@ -13,7 +13,7 @@ IDO.tasks.init = ->
 
   $('#new-form-link').on('click', (e) ->
     e.preventDefault()
-    $('#new-task-wrapper').toggleClass('display-none')
+    $('#new-task-wrapper').toggleClass('hidden')
   )
 
   $('#post-new-task').on('click', (e) ->
