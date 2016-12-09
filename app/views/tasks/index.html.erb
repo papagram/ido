@@ -2,7 +2,9 @@
 
 <h1>Tasks</h1>
 
-<table>
+<%= link_to 'New Task', new_task_path, class: 'mui-btn mui-btn--flat mui-btn--primary mui--pull-right' %>
+
+<table class="mui-table">
   <thead>
     <tr>
       <th>Subject</th>
@@ -16,10 +18,6 @@
 
   <tbody id="tasks-data"></tbody>
 </table>
-
-<br>
-
-<%= link_to 'New Task', new_task_path %>
 
 <script type="text/html" id="tasks-template">
   <tr>

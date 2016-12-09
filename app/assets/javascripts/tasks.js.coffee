@@ -11,3 +11,25 @@ IDO.tasks.init = ->
     _.each response, (task) ->
       $(template(task)).appendTo tbody
   )
+
+IDO.tasks.init_new = ->
+  $('#post-new-task').on('click', (e) ->
+    e.preventDefault()
+    IDO.tasks.post()
+  )
+
+  flatpickr('.calendar', {
+    enableTime: true
+  })
+
+IDO.tasks.post = ->
+  IDO.request(
+    type: 'POST',
+    url: '/tasks.json',
+    dataType: 'json',
+    data: $('#new_task').serialize(),
+    timeout: 10000,
+  ).then((response) ->
+    console.log response
+    location.href= '/tasks'
+  )
