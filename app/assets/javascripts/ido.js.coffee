@@ -7,3 +7,8 @@ IDO.request = (params) ->
   ).always((response, statusText, obj) ->
     console.log '通信が完了しました。'
   )
+
+IDO.readyDatetimepicker = ->
+  flatpickr('.calendar', {
+    enableTime: true
+  })
