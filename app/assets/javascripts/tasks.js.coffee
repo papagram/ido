@@ -11,6 +11,16 @@ IDO.tasks.init = ->
 
   IDO.readyDatetimepicker()
 
+  $('#new-form-link').on('click', (e) ->
+    e.preventDefault()
+    $('#new-task-wrapper').toggleClass('display-none')
+  )
+
+  $('#post-new-task').on('click', (e) ->
+    e.preventDefault()
+    IDO.tasks.post()
+  )
+
 IDO.tasks.initNew = ->
   IDO.readyDatetimepicker()
 
@@ -33,15 +43,3 @@ IDO.tasks.insertTask = (response) ->
       $(template(task)).appendTo tbody
   else
     $(template(response)).appendTo tbody
-
-$ ->
-  $('#post-new-task').on('click', (e) ->
-    e.preventDefault()
-    IDO.tasks.post()
-  )
-
-$ ->
-  $('#new-form-link').on('click', (e) ->
-    e.preventDefault()
-    $('#new-task-wrapper').toggleClass('display-none')
-  )
