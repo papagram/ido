@@ -38,8 +38,11 @@ IDO.tasks.post = ->
 IDO.tasks.insertTask = (response) ->
   template = _.template($('#tasks-template').text())
   tbody = $('#tasks-data')
+  insert = (task) ->
+    $(template(task)).appendTo tbody
+
   if Array.isArray(response)
     _.each response, (task) ->
-      $(template(task)).appendTo tbody
+      insert(task)
   else
-    $(template(response)).appendTo tbody
+    insert(response)
