@@ -61,6 +61,8 @@ IDO.tasks.init = ->
       IDO.tasks.insertTask(response)
     )
 
+    $('#new-task-wrapper').toggleClass('hidden')
+
     toastr.options = {
       timeOut: 2000,
       positionClass: 'toast-top-center'
