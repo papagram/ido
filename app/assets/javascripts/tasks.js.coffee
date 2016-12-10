@@ -1,20 +1,48 @@
+## 名前空間宣言 ##
+## クラスや関数はこの下に置く ##
 window.IDO.tasks = {}
 
+## クラス定義 ##
+## CRUDに相当するメソッドを実装する ##
+## 通信に必要なパラメーターはクラス自身が知っているべき ##
+## promiseオブジェクトを返却する ##
 class IDO.tasks.TaskService
-  create: (params) ->
-    IDO.request(params)
+  getAll: ->
+    IDO.request(
+      type: 'GET',
+      url: '/tasks.json',
+      timeout: 10000
+    )
 
-## 初期化関数は各画面で一度だけ呼ばれる！
+  create: (formData) ->
+    IDO.request(
+      type: 'POST',
+      url: '/tasks.json',
+      dataType: 'json',
+      data: formData,
+      timeout: 10000
+    )
+
+## 関数定義 ##
+IDO.tasks.insertTask = (response) ->
+  template = _.template($('#tasks-template').text())
+  tbody = $('#tasks-data')
+  insert = (task) ->
+    $(template(task)).appendTo tbody
+
+  if Array.isArray(response)
+    _.each response, (task) ->
+      insert(task)
+  else
+    insert(response)
+
+## 初期化関数は各画面で一度だけ呼ばれる！ ##
 
 # /tasksの初期化関数
 IDO.tasks.init = ->
   taskService = new IDO.tasks.TaskService()
 
-  taskService.create(
-    type: 'GET',
-    url: '/tasks.json',
-    timeout: 10000
-  ).then((response) ->
+  taskService.getAll().then((response) ->
     IDO.tasks.insertTask(response)
   )
 
@@ -28,13 +56,8 @@ IDO.tasks.init = ->
   $('#post-new-task').on('click', (e) ->
     e.preventDefault()
 
-    taskService.create(
-      type: 'POST',
-      url: '/tasks.json',
-      dataType: 'json',
-      data: $('#new_task').serialize(),
-      timeout: 10000
-    ).then((response) ->
+    formData = $('#new_task').serialize()
+    taskService.create(formData).then((response) ->
       IDO.tasks.insertTask(response)
     )
   )
@@ -42,17 +65,3 @@ IDO.tasks.init = ->
 # /tasks/newの初期化関数
 IDO.tasks.initNew = ->
   IDO.readyDatetimepicker()
-
-## 関数定義
-
-IDO.tasks.insertTask = (response) ->
-  template = _.template($('#tasks-template').text())
-  tbody = $('#tasks-data')
-  insert = (task) ->
-    $(template(task)).appendTo tbody
-
-  if Array.isArray(response)
-    _.each response, (task) ->
-      insert(task)
-  else
-    insert(response)
