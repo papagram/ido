@@ -60,6 +60,12 @@ IDO.tasks.init = ->
     taskService.create(formData).then((response) ->
       IDO.tasks.insertTask(response)
     )
+
+    toastr.options = {
+      timeOut: 2000,
+      positionClass: 'toast-top-center'
+    }
+    toastr.success('新しいタスクを登録しました！')
   )
 
 # /tasks/newの初期化関数
