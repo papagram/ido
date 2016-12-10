@@ -1,10 +1,19 @@
 window.IDO.tasks = {}
 
+class IDO.tasks.TaskService
+  create: (params) ->
+    IDO.request(params)
+
+## 初期化関数は各画面で一度だけ呼ばれる！
+
+# /tasksの初期化関数
 IDO.tasks.init = ->
-  IDO.request(
+  taskService = new IDO.tasks.TaskService()
+
+  taskService.create(
     type: 'GET',
     url: '/tasks.json',
-    timeout: 10000,
+    timeout: 10000
   ).then((response) ->
     IDO.tasks.insertTask(response)
   )
@@ -18,22 +27,23 @@ IDO.tasks.init = ->
 
   $('#post-new-task').on('click', (e) ->
     e.preventDefault()
-    IDO.tasks.post()
+
+    taskService.create(
+      type: 'POST',
+      url: '/tasks.json',
+      dataType: 'json',
+      data: $('#new_task').serialize(),
+      timeout: 10000
+    ).then((response) ->
+      IDO.tasks.insertTask(response)
+    )
   )
 
+# /tasks/newの初期化関数
 IDO.tasks.initNew = ->
   IDO.readyDatetimepicker()
 
-IDO.tasks.post = ->
-  IDO.request(
-    type: 'POST',
-    url: '/tasks.json',
-    dataType: 'json',
-    data: $('#new_task').serialize(),
-    timeout: 10000,
-  ).then((response) ->
-    IDO.tasks.insertTask(response)
-  )
+## 関数定義
 
 IDO.tasks.insertTask = (response) ->
   template = _.template($('#tasks-template').text())
