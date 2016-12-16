@@ -38,8 +38,7 @@ IDO.tasks.insertTask = (response) ->
 
 IDO.tasks.afterCreating = ->
   # フォームをクリア
-  $('#new_task').find('textarea, :text, select').val('')
-  $('#task_status').find('option:first').prop('selected', true)
+  $('#new_task')[0].reset()
 
   # フォームを隠す
   $('#new-task-wrapper').toggleClass('hidden')
