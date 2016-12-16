@@ -36,20 +36,6 @@ IDO.tasks.insertTask = (response) ->
   else
     insert(response)
 
-IDO.tasks.afterCreating = ->
-  # フォームをクリア
-  $('#new_task')[0].reset()
-
-  # フォームを隠す
-  $('#new-task-wrapper').toggleClass('hidden')
-
-  # 通知を出してあげる
-  toastr.options = {
-    timeOut: 2000,
-    positionClass: 'toast-top-center'
-  }
-  toastr.success('新しいタスクを登録しました！')
-
 ## 初期化関数は各画面で一度だけ呼ばれる！ ##
 
 # /tasksの初期化関数
@@ -73,7 +59,20 @@ IDO.tasks.init = ->
     formData = $('#new_task').serialize()
     taskService.create(formData).then((response) ->
       IDO.tasks.insertTask(response)
-      IDO.tasks.afterCreating()
+
+      do ->
+        # フォームをクリア
+        $('#new_task')[0].reset()
+
+        # フォームを隠す
+        $('#new-task-wrapper').toggleClass('hidden')
+
+        # 通知を出してあげる
+        toastr.options = {
+          timeOut: 2000,
+          positionClass: 'toast-top-center'
+        }
+        toastr.success('新しいタスクを登録しました！')
     )
   )
 
