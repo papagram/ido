@@ -23,18 +23,44 @@ class IDO.tasks.TaskService
       timeout: 10000
     )
 
+  destroy: (data) ->
+    IDO.request(
+      type: 'DELETE',
+      url: '/tasks/' + data['id'] + '.json',
+      dataType: 'json',
+      data: data,
+      timeout: 10000
+    )
+
 ## 関数定義 ##
 IDO.tasks.insertTask = (response) ->
   template = _.template($('#tasks-template').text())
   tbody = $('#tasks-data')
+
   insert = (task) ->
     $(template(task)).appendTo tbody
+
+  deleteTask = ->
+    $('.delete-task').on('click', (e) ->
+      e.preventDefault()
+
+      target = $(this)
+      taskService = new IDO.tasks.TaskService()
+      data = {
+        id: $(this).data('id')
+      }
+      taskService.destroy(data).then( ->
+        target.parents('tr').remove()
+      )
+    )
 
   if Array.isArray(response)
     _.each response, (task) ->
       insert(task)
+    deleteTask()
   else
     insert(response)
+    deleteTask()
 
 afterCreating = ->
   # フォームをクリア
