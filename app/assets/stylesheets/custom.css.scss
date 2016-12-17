@@ -6,3 +6,34 @@
 .hidden {
   display: none;
 }
+
+.submit-wrapper {
+  position: relative;
+  width: 100px;
+
+  .loader {
+    position: absolute;
+    top: 10px;
+    right: 35px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 8px solid #000;
+    border-right-color: transparent;
+    animation: spin 1s linear infinite;
+  }
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+
+    50% {
+      transform: rotate(180deg);
+    }
+
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+}

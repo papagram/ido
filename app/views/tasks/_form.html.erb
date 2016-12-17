@@ -36,5 +36,8 @@
     <%= f.text_field :closing_at, class: 'calendar' %>
   </div>
 
-  <%= f.submit id: 'post-new-task', class: 'mui-btn mui-btn--flat' %>
+  <div class="submit-wrapper">
+    <%= f.submit id: 'post-new-task', class: 'mui-btn mui-btn--flat now-loading' %>
+    <div class="loader hidden"></div>
+  </div>
 <% end %>

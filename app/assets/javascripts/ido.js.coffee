@@ -1,10 +1,14 @@
 window.IDO = {}
 
 IDO.request = (params) ->
+  $('.submit-wrapper .now-loading').toggleClass('hidden')
+  $('.submit-wrapper .loader').toggleClass('hidden')
   $.ajax(params).fail((xhr, statusText, errorThrown) ->
     alert "#{statusText}: データの取得に失敗しました。"
     console.log errorThrown
   ).always((response, statusText, obj) ->
+    $('.submit-wrapper .now-loading').toggleClass('hidden')
+    $('.submit-wrapper .loader').toggleClass('hidden')
     console.log '通信が完了しました。'
   )
 
