@@ -23,12 +23,32 @@ class IDO.tasks.TaskService
       timeout: 10000
     )
 
+  destroy: (url) ->
+    IDO.request(
+      type: 'DELETE',
+      url: url
+      dataType: 'json',
+      timeout: 10000
+    )
+
 ## 関数定義 ##
 IDO.tasks.insertTask = (response) ->
   template = _.template($('#tasks-template').text())
   tbody = $('#tasks-data')
+
   insert = (task) ->
-    $(template(task)).appendTo tbody
+    row = $(template(task)).appendTo tbody
+    addDeleteTask(row)
+
+  addDeleteTask = (row) ->
+    row.find('.delete-task').on('click', (e) ->
+      e.preventDefault()
+
+      taskService = new IDO.tasks.TaskService()
+      taskService.destroy($(this).attr('href')).then( ->
+        row.remove()
+      )
+    )
 
   if Array.isArray(response)
     _.each response, (task) ->
