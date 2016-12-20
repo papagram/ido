@@ -23,12 +23,11 @@ class IDO.tasks.TaskService
       timeout: 10000
     )
 
-  destroy: (data) ->
+  destroy: (url) ->
     IDO.request(
       type: 'DELETE',
-      url: '/tasks/' + data['id'] + '.json',
+      url: url
       dataType: 'json',
-      data: data,
       timeout: 10000
     )
 
@@ -40,27 +39,24 @@ IDO.tasks.insertTask = (response) ->
   insert = (task) ->
     $(template(task)).appendTo tbody
 
-  deleteTask = ->
-    $('.delete-task').on('click', (e) ->
+  addDeleteTask = (row) ->
+    targetRow = $(row)
+    targetRow.find('.delete-task').on('click', (e) ->
       e.preventDefault()
 
-      target = $(this)
       taskService = new IDO.tasks.TaskService()
-      data = {
-        id: $(this).data('id')
-      }
-      taskService.destroy(data).then( ->
-        target.parents('tr').remove()
+      taskService.destroy($(this).attr('href')).then( ->
+        targetRow.remove()
       )
     )
 
   if Array.isArray(response)
     _.each response, (task) ->
-      insert(task)
-    deleteTask()
+      row = insert(task)
+      addDeleteTask(row)
   else
-    insert(response)
-    deleteTask()
+    row = insert(response)
+    addDeleteTask(row)
 
 afterCreating = ->
   # フォームをクリア
