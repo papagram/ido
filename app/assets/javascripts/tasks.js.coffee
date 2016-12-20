@@ -37,26 +37,24 @@ IDO.tasks.insertTask = (response) ->
   tbody = $('#tasks-data')
 
   insert = (task) ->
-    $(template(task)).appendTo tbody
+    row = $(template(task)).appendTo tbody
+    addDeleteTask(row)
 
   addDeleteTask = (row) ->
-    targetRow = $(row)
-    targetRow.find('.delete-task').on('click', (e) ->
+    row.find('.delete-task').on('click', (e) ->
       e.preventDefault()
 
       taskService = new IDO.tasks.TaskService()
       taskService.destroy($(this).attr('href')).then( ->
-        targetRow.remove()
+        row.remove()
       )
     )
 
   if Array.isArray(response)
     _.each response, (task) ->
-      row = insert(task)
-      addDeleteTask(row)
+      insert(task)
   else
-    row = insert(response)
-    addDeleteTask(row)
+    insert(response)
 
 afterCreating = ->
   # フォームをクリア
